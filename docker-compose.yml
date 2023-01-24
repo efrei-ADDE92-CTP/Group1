@@ -1,0 +1,31 @@
+version: '3'
+services:
+
+  # a sample app with metrics enabled
+  app:
+    container_name: app
+    build:
+      context: app
+    stop_signal: SIGKILL
+
+  # the Prometheus server
+  prometheus:
+    container_name: prometheus
+    image: prom/prometheus:v2.2.1
+    volumes:
+      - ./prometheus/config.yml:/app/prometheus/prometheus.yml
+    depends_on:
+      - app
+
+  # Grafana for visualization
+  grafana:
+    image: grafana/grafana:5.1.0
+    volumes:
+      - ./grafana/config.ini:/app/grafana/grafana.ini
+      - ./grafana/datasource.yaml:/app/grafana/provisioning/datasources/default.yaml
+      - ./grafana/dashboard.yaml:/app/grafana/provisioning/dashboards/default.yaml
+      - ./grafana/dashboards:/var/lib/grafana/dashboards
+    ports:
+      - 3000:3000
+    depends_on:
+      - prometheus

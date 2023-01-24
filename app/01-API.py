@@ -20,16 +20,15 @@ g = Gauge('success_rate_requests', 'Rate of success requests')
 
 @app.route('/predict', methods=['POST'])
 def get_predict():
+    a.inc()
+    data = request.get_json(force=True)
+    df = pd.DataFrame(data, index=[0])
+    for col in model_columns:
+        if col not in df.columns:
+            df[col] = 0
+    prediction = model.predict(df)
 
-  data = request.get_json(force=True)
-  df = pd.DataFrame(data, index=[0])
-  for col in model_columns:
-    if col not in df.columns:
-      df[col] = 0
-  prediction = model.predict(df)
-  a.inc()
-
-  return jsonify({'prediction': list(prediction)})
+    return jsonify({'prediction': list(prediction)})
 
 @app.after_request
 def log_the_status_code(response):
@@ -37,7 +36,7 @@ def log_the_status_code(response):
         s.inc()
     else:
         f.inc()
-    success_rate = (s._value.get() / a._value.get()) * 100
+    success_rate = (s._value.get() / (f._value.get() + s._value.get())) * 100
     g.set(success_rate)
     logging.warning("status as string %s" % response.status)
     logging.warning("status as integer %s" % response.status_code)
