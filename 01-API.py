@@ -36,7 +36,7 @@ def log_the_status_code(response):
         s.inc()
     else:
         f.inc()
-    success_rate = (s._value.get() / (f._value.get() + s._value.get())) * 100
+    success_rate = (s._value / (f._value + s._value)) * 100
     g.set(success_rate)
     logging.warning("status as string %s" % response.status)
     logging.warning("status as integer %s" % response.status_code)
@@ -48,9 +48,9 @@ if __name__ == '__main__':
 
     model_columns = joblib.load('model_columns.pkl')
     
-    start_http_server(8000) 
+    start_http_server(5050) 
 
-    app.run(port = 8080)
+    app.run(port = 5000)
     
     #curl localhost:8080/predict -H "Content-Type: application/json" -d '{"sepal length (cm)": 5,"sepal width (cm)": 3,"petal length (cm)": 1,"petal width (cm)": 0.2}'
 
@@ -58,4 +58,4 @@ if __name__ == '__main__':
 
     #ab -n 1000 http://localhost:8080//predict -H "Content-Type: application/json" -d '{"sepal length (cm)": 5,"sepal width (cm)": 3,"petal length (cm)": 1,"petal width (cm)": 0.2}'
 
- 
+    

@@ -20,4 +20,4 @@ class WebsiteUser(HttpUser):
     wait_time = between(1, 2)
 
 
-#locust -f 02-Load_Testing.py --host=http://localhost:8080
+#locust -f 02-Load_Testing.py --host=http://localhost:5000
