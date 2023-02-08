@@ -45,17 +45,15 @@ def get_predict():
 if __name__ == '__main__':
 
     # Start up the server to expose the metrics.
-
     model_columns = joblib.load('model_columns.pkl')
     
     #start_http_server(5050) 
-
     app.run(port = 5000)
+
 
     #sudo docker build . -t knn:0.0.1
     #sudo docker run --network host -it knn:0.0.1   
     
     #curl localhost:5000/predict -H "Content-Type: application/json" -d '{"sepal length (cm)": 5,"sepal width (cm)": 3,"petal length (cm)": 1,"petal width (cm)": 0.2}'
-
     #curl localhost:5050/metrics
     
