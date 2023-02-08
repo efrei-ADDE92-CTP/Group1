@@ -6,7 +6,7 @@ Steps to run the project, in local mode:
 ```
 Post and get prediction:
 ```
-curl https://gr1-container-app.kindsand-29ffcb50.westeurope.azurecontainerapps.io/predict -H "Content-Type: application/json" -d '{"sepal length (cm)": 2,"sepal width (cm)": 1,"petal length (cm)": 3,"petal width (cm)": 0.3}'
+curl localhost:8080/predict -H "Content-Type: application/json" -d '{"sepal length (cm)": 2,"sepal width (cm)": 1,"petal length (cm)": 3,"petal width (cm)": 0.3}'
 ```
 Monitor metrics of the API with Prometheus
 ```
