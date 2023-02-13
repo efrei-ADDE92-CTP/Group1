@@ -50,7 +50,7 @@ if __name__ == '__main__':
     #start_http_server(5050) 
     app.run(port = 5000)
 
-
+    #sudo systemctl restart docker.socket docker.service  
     #sudo docker build . -t knn:0.0.1
     #sudo docker run --network host -it knn:0.0.1   
     
