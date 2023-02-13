@@ -21,3 +21,4 @@ Then, from the current working directory:
 locust -f 02-Load_Testing.py --host=http://localhost:8080
 ```
 Open localhost:8089 on your browser to monitor the load test
+
