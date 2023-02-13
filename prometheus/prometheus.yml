@@ -1,0 +1,16 @@
+global:
+  scrape_interval: 3s
+
+  external_labels:
+    monitor: "01-API"
+
+rule_files:
+
+scrape_configs:
+  - job_name: "prometheus"
+    static_configs:
+      - targets: ["prometheus:9090"]
+
+  - job_name: "API"
+    static_configs:
+      - targets: ["app:8080"]

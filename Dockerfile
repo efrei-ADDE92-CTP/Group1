@@ -7,4 +7,6 @@ RUN python -m pip install --no-cache-dir -r requirements.txt
 
 COPY . .
 
-CMD [ "python3" , "01-API.py"]
+COPY 01-API.py /var/server/app.py
+
+CMD ["python3", "/var/server/app.py"]
