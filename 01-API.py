@@ -52,7 +52,7 @@ if __name__ == '__main__':
     # Start up the server to expose the metrics.
     model_columns = joblib.load('model_columns.pkl')
     
-    app.run(port = 5050)
+    app.run(host='0.0.0.0',port = 5050)
 
     #sudo systemctl restart docker.socket docker.service  
     #sudo docker build . -t knn:0.0.1
